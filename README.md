@@ -30,7 +30,13 @@ This project is an **automation script** designed to help TikTok users download 
   python --version
   ```
 
-### 3. Setup Instructions
+---
+
+## Setup Instructions
+
+---
+
+### 1. Install Dependencies
 
 - Install Dependencies and add your **user_data_tiktok.json** to the same directory as the python script.
 
@@ -39,3 +45,48 @@ This project is an **automation script** designed to help TikTok users download 
   ```bash
       pip install -r requirements.txt
   ```
+
+### 2. Run the script
+
+- In your console/ command prompt, use the following command:
+
+```python
+    python tiktok_audio_downloader.py
+```
+
+- inside the console you should be prompted to type in your desired output directory (ie where the mp3 files will be downloaded.) Simply Paste in the path to your directory and the script will download all of your files.
+
+---
+
+## Note
+
+- please ignore console output regarding timeouts. It was included for logging purposes and I am to lazy to remove it.
+
+## License
+
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more details.
+
+## Contributions
+
+Contributions are welcome! If you'd like to contribute, please feel free to:
+
+- **Submit pull requests** to improve the code or add new features.
+- **Submit issues** if you encounter bugs or have suggestions for improvements.
+- **Provide recommendations** to enhance the functionality or usability of the project.
+
+### How to Contribute:
+
+1. Fork the repository.
+2. Create a new branch for your changes.
+3. Make your changes, and write tests if applicable.
+4. Commit your changes with clear messages.
+5. Push to your forked repository.
+6. Open a pull request with a description of your changes.
+
+### Questions?
+
+If you have any questions or need assistance, don't hesitate to ask! You can open an issue, and we will respond as soon as possible.
+
+## Acknowledgements
+
+Thank you to everyone who has contributed to this project! (me)

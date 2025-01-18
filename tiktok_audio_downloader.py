@@ -41,22 +41,21 @@ def download_tiktok_audio(tiktok_url,driver):
         downloadRedirectButton.click()
 
 
-        blockPopup()
+        blockPopup(driver)
         #download the mp3
         download_button_expression = "//a[contains(@class, btn) and contains(@class, orange) and contains(@class,download) and text()='Download MP3' and @data-event='mp3_download_click']"
         downloadButton = WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH,download_button_expression)))
         downloadButton.click()
-        blockPopup()
+        blockPopup(driver)
 
         #navigate back to the start menu
-        download_anothermp3_button_expression = ""
+        download_anothermp3_button_expression = "//a[contains(@class,btn) and contains(@class,blue-grey) and text()='Download Another MP3']"
         download_anothermp3_button = WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH,download_anothermp3_button_expression)))
         download_anothermp3_button.click()
-        time.sleep(5)
+        time.sleep(1)
     except Exception as e:
         print(e)
-    finally:
-        driver.quit
+   
 
 
 
@@ -67,9 +66,9 @@ def blockPopup(driver, timeout=10):
         if modal:
 
             close_button_expression = "//a[contains(@class, btn) and contains(@class, orange) and contains(@class,modal-close) and text()='Close']"
-            close_button = WebDriverWait(driver,3).until(EC.element_to_be_clickable((By.XPATH,close_button_expression)))
+            close_button = WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.XPATH,close_button_expression)))
             close_button.click()
-            print("Modal closed successfully")
+            # print("Modal closed successfully")
     except:
         print("no modal found or timed out")
 
@@ -86,18 +85,19 @@ def main(download_folder):
     options.add_extension('cjpalhdlnbpafiamejdnhcphjbkeiagm.crx')
 
     #initialize web driver
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=options)
+    webDriver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=options)
 
     try:
         #load page
-        driver.get("https://musicaldown.com/")
+        webDriver.get("https://musicaldown.com/")
 
 
         with open('./user_data_tiktok.json', 'r', encoding='utf-8') as data:
             favorites = ijson.items(data, 'Activity.Favorite Sounds.FavoriteSoundList.item')
             for sound in favorites:
                 songUrl = buildSongUrl(sound["Link"])
-                print(songUrl)
+                download_tiktok_audio(songUrl,webDriver)
+                
 
     except FileNotFoundError as e:
         print(e)
@@ -105,6 +105,8 @@ def main(download_folder):
     except Exception as e:
         print('bad stuff happened')
         print(e)
+    finally:
+        webDriver.quit
 
 
 

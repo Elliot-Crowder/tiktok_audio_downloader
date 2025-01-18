@@ -1,2 +1,4 @@
 vid_download.py
 *.json
+/venv
+/output

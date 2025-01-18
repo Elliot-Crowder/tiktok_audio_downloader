@@ -55,6 +55,10 @@ def download_tiktok_audio(tiktok_url,driver):
         time.sleep(1)
     except Exception as e:
         print(e)
+        print(f'error with {tiktok_url}')
+        driver.back()
+        time.sleep(2)
+        return
    
 
 
@@ -92,7 +96,7 @@ def main(download_folder):
         webDriver.get("https://musicaldown.com/")
 
 
-        with open('./user_data_tiktok.json', 'r', encoding='utf-8') as data:
+        with open('./user_data_test.json', 'r', encoding='utf-8') as data:
             favorites = ijson.items(data, 'Activity.Favorite Sounds.FavoriteSoundList.item')
             for sound in favorites:
                 songUrl = buildSongUrl(sound["Link"])
